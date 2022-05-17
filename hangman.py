@@ -19,9 +19,11 @@ def hangman():
     alphabets = set(string.ascii_uppercase())
     used_letters = set()
 
-    while len(word_letters) > 0:
+    lives = 6
 
-        print('these are the words that are used till now : ',
+    while len(word_letters) > 0 and lives > 0:
+
+        print('You have ', lives, 'left', 'these are the words that are used till now : ',
               ' '.join(used_letters))
 
         word_list = [
@@ -35,11 +37,18 @@ def hangman():
             if user_word in word_letters:
                 word_letters.remove(user_word)
 
+            else:
+                lives = lives - 1
+
         elif user_word in used_letters:
             print("you have already guessed this word,pls try again letter")
 
         else:
             print("Invalid pls try again")
+    if lives == 0:
+        print('you have lost the game,sorry')
+    else:
+        print('you have guessed the word correctly')
 
 
 hangman()
